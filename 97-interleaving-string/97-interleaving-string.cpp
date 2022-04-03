@@ -1,29 +1,52 @@
 class Solution {
 public:
-    unordered_map<string,bool> dp;
-    bool check(string s1,string s2,string s3,int p1,int p2,int p3,int l1,int l2,int l3){
-        if(p3==l3){
-            return (p1==l1&&p2==l2);
-        }
-        string key=to_string(p1)+"*"+to_string(p2)+"*"+to_string(p3);
-        if(dp.find(key)!=dp.end()) return dp[key];
-        if(s3[p3]==s1[p1]&&s3[p3]==s2[p2]){
-            dp[key]=check(s1,s2,s3,p1+1,p2,p3+1,l1,l2,l3);
-            return dp[key]=dp[key]||check(s1,s2,s3,p1,p2+1,p3+1,l1,l2,l3);
-        }
-        else if(s3[p3]==s1[p1]){
-            return dp[key]=check(s1,s2,s3,p1+1,p2,p3+1,l1,l2,l3);
-        }
-        else if(s3[p3]==s2[p2]){
-            return dp[key]=check(s1,s2,s3,p1,p2+1,p3+1,l1,l2,l3);
-        }
-        return dp[key]=0;
-    }
     bool isInterleave(string s1, string s2, string s3) {
-        int len1=s1.length();
-        int len2=s2.length();
-        int len3=s3.length();
-        if(len1+len2!=len3) return 0;
-        return check(s1,s2,s3,0,0,0,len1,len2,len3);
+        int l1=s1.length();
+        int l2=s2.length();
+        int l3=s3.length();
+        if(l3!=l1+l2) return 0;
+        bool dp[l3+1][l1+1][l2+1];
+        for(int i=0;i<=l3;i++){
+            for(int j=0;j<=l1;j++){
+                for(int k=0;k<=l2;k++) dp[i][j][k]=0;
+            }
+        }
+        for(int i=0;i<=l3;i++){
+            for(int j=0;j<=i&&j<=l1;j++){
+                for(int k=0;k+j<=i&&k<=l2;k++){
+                    if(i==0&&j==0&&k==0){
+                        dp[0][0][0]=1;
+                    }
+                    else if(j==0&&k==0){
+                        dp[i][j][k]=0;
+                    }
+                    else if(j==0){
+                        if(s3[i-1]==s2[k-1]){
+                            dp[i][j][k]=dp[i-1][j][k-1];
+                        }
+                        else dp[i][j][k]=0;
+                    }
+                    else if(k==0){
+                        if(s3[i-1]==s1[j-1]){
+                            dp[i][j][k]=dp[i-1][j-1][k];
+                        }
+                        else dp[i][j][k]=0;
+                    }
+                    else{
+                        if(s3[i-1]==s1[j-1]&&s3[i-1]==s2[k-1]){
+                            dp[i][j][k]=dp[i-1][j-1][k]|dp[i-1][j][k-1];
+                        }
+                        else if(s3[i-1]==s1[j-1]){
+                            dp[i][j][k]=dp[i-1][j-1][k];
+                        }
+                        else if(s3[i-1]==s2[k-1]){
+                            dp[i][j][k]=dp[i-1][j][k-1];
+                        }
+                        else dp[i][j][k]=0;
+                    }
+                }
+            }
+        }
+        return dp[l3][l1][l2];
     }
 };
