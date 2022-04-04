@@ -31,13 +31,9 @@ public:
                 return root;
             }
             else if(root->right){
-                // TreeNode* del=root;
-                // delete del;
                 return root->right;
             }
             else if(root->left){
-                // TreeNode* del=root;
-                // delete del;
                 return root->left;
             }
             return NULL;
