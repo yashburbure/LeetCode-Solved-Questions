@@ -11,83 +11,37 @@
  */
 class Solution {
 public:
+    TreeNode* successor(TreeNode *root){
+        while(root->left) root=root->left;
+        return root;
+    }
     TreeNode* deleteNode(TreeNode* root, int key) {
-        TreeNode* temp=root;
-        TreeNode* par=NULL;
-        while(temp&&temp->val!=key){
-            par=temp;
-            if(temp->val<key) temp=temp->right;
-            else temp=temp->left;
+        if(!root) return NULL;
+        if(root->val>key){
+            root->left=deleteNode(root->left,key);
         }
-        if(!temp) return root;
-        if(temp->left&&temp->right){
-            TreeNode* succ=temp->right;
-            TreeNode* upp=temp;
-            while(succ->left){
-                upp=succ;
-                succ=succ->left;
-            }
-            if(temp==upp){
-                if(succ->right){
-                    upp->right=succ->right;
-                }
-                else{
-                    upp->right=NULL;
-                }
-            }
-            else{
-                if(succ->right){
-                    upp->left=succ->right;
-                }
-                else{
-                    upp->left=NULL;
-                }
-            }
-            temp->val=succ->val;
-            return root;
-        }
-        else if(temp->left||temp->right){
-            if(par){
-                if(temp->left){
-                    if(par->left==temp){
-                        par->left=temp->left;
-                    }
-                    else{
-                        par->right=temp->left;
-                    }
-                }
-                else{
-                    if(par->right==temp){
-                        par->right=temp->right;
-                    }
-                    else par->left=temp->right;
-                }
-                return root;
-            }
-            else{
-                if(temp->left){
-                    root=temp->left;
-                }
-                else{
-                    root=temp->right;
-                }
-                return root;
-            }
+        else if(root->val<key){
+            root->right=deleteNode(root->right,key);
         }
         else{
-            if(par){
-                TreeNode* del;
-                if(par->val<key){
-                    del=par->right;
-                    par->right=NULL;
-                } 
-                else{
-                    del=par->left;
-                    par->left=NULL;
-                }
+            if(root->left&&root->right){
+                TreeNode* succ=successor(root->right);
+                root->right=deleteNode(root->right,succ->val);
+                root->val=succ->val;
                 return root;
+            }
+            else if(root->right){
+                // TreeNode* del=root;
+                // delete del;
+                return root->right;
+            }
+            else if(root->left){
+                // TreeNode* del=root;
+                // delete del;
+                return root->left;
             }
             return NULL;
         }
+        return root;
     }
 };
