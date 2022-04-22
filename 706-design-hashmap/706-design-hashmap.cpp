@@ -1,6 +1,6 @@
 class MyHashMap {
 public:
-    unordered_map<int,int> mp;
+    map<int,int> mp;
     MyHashMap() {
         
     }
@@ -10,12 +10,16 @@ public:
     }
     
     int get(int key) {
-        if(mp.find(key)==mp.end()) return -1;
+        auto it=mp.lower_bound(key);
+        if(it==mp.end()) return -1;
+        else if(it->first!=key) return -1;
         return mp[key];
     }
     
     void remove(int key) {
-        if(mp.find(key)!=mp.end()) mp.erase(mp.find(key));
+        auto it=mp.lower_bound(key);
+        if(it==mp.end()) return ;
+        if(it->first==key) mp.erase(it);
     }
 };
 
