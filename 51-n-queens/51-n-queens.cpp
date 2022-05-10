@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool is_safe(int m,int n,vector<string> board){
+    bool is_safe(int m,int n,vector<string>& board){
         int size=board.size();
         for(int i=m-1;i>=0;i--){
             if(board[i][n]=='Q') return 0;
@@ -16,7 +16,7 @@ public:
         }
         return 1;
     }
-    void back_trap(vector<vector<string>> &ans,int n,int row,vector<string> board){
+    void back_trap(vector<vector<string>> &ans,int n,int row,vector<string>& board){
         if(row==n){
             ans.push_back(board);
             return;
