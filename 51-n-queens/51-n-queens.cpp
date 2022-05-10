@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool is_safe(int m,int n,vector<string>& board){
+    bool is_safe(int &m,int &n,vector<string>& board){
         int size=board.size();
         for(int i=m-1;i>=0;i--){
             if(board[i][n]=='Q') return 0;
@@ -16,7 +16,7 @@ public:
         }
         return 1;
     }
-    void back_trap(vector<vector<string>> &ans,int n,int row,vector<string>& board){
+    void back_trap(vector<vector<string>> &ans,int &n,int &row,vector<string>& board){
         if(row==n){
             ans.push_back(board);
             return;
@@ -24,7 +24,9 @@ public:
         for(int i=0;i<n;i++){
             if(is_safe(row,i,board)){
                 board[row][i]='Q';
-                back_trap(ans,n,row+1,board);
+                row++;
+                back_trap(ans,n,row,board);
+                row--;
             }
             board[row][i]='.';
         }
@@ -32,7 +34,8 @@ public:
     vector<vector<string>> solveNQueens(int n) {
         vector<vector<string>> ans;
         vector<string> board(n,string(n,'.'));
-        back_trap(ans,n,0,board);
+        int row=0;
+        back_trap(ans,n,row,board);
         return ans;
     }
 };
