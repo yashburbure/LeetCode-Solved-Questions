@@ -11,8 +11,10 @@
  */
 class Solution {
 public:
+    map<pair<int,int>,vector<TreeNode*>> mp;
     vector<TreeNode*> generate_Tree(int st,int end){
         vector<TreeNode*> Trees;
+        if(mp.find({st,end})!=mp.end()) return mp[{st,end}];
         if(st>end){
             Trees.push_back(NULL);
             return Trees;
@@ -29,7 +31,7 @@ public:
                 }
             }
         }
-        return Trees;
+        return mp[{st,end}]=Trees;
     }
     vector<TreeNode*> generateTrees(int n) {
         vector<TreeNode*> Trees=generate_Tree(1,n);
