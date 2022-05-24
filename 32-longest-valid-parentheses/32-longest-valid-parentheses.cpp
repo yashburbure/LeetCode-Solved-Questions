@@ -17,7 +17,6 @@ public:
                     st.pop();
                     dp[i]=2;
                     if(tp.second==i-1){
-                        // dp[i]=2+dp[tp.second-1];
                         if(tp.second==0){
                             dp[i]=2;
                         }
