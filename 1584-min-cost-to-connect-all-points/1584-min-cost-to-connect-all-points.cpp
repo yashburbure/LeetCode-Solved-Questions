@@ -1,4 +1,3 @@
-#define pii pair<int,int> 
 class Solution {
 public:
     map<pair<int,int>,pair<int,int>> parent;
@@ -27,18 +26,15 @@ public:
     }
     int minCostConnectPoints(vector<vector<int>>& points) {
         int n=points.size();
-        vector<pair<int,pair<pii,pii>>> edges;
+        int wt;
+        vector<pair<int,pair<int,int>>> edges;
         for(auto &it:points){
             make({it[0],it[1]});
         }
         for(int i=0;i<n;i++){
             for(int j=i+1;j<n;j++){
-                int diff=abs(points[i][0]-points[j][0])+abs(points[i][1]-points[j][1]);
-                pair<int,pair<pii,pii>> obj;
-                obj.first=diff;
-                obj.second.first={points[i][0],points[i][1]};
-                obj.second.second={points[j][0],points[j][1]};
-                edges.push_back(obj);
+                wt=abs(points[i][0]-points[j][0])+abs(points[i][1]-points[j][1]);
+                edges.push_back({wt,{i,j}});
             }
         }
         int ans=0;
@@ -47,8 +43,8 @@ public:
         });
         for(auto &it:edges){
             int wt=it.first;
-            auto pt1=it.second.first;
-            auto pt2=it.second.second;
+            pair<int,int> pt1={points[it.second.first][0],points[it.second.first][1]};
+            pair<int,int> pt2={points[it.second.second][0],points[it.second.second][1]};
             if(find(pt1)!=find(pt2)){
                 ans+=wt;
                 Union(pt1,pt2);
