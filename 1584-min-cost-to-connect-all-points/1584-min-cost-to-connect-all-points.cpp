@@ -6,11 +6,11 @@ public:
         parent[v]=v;
         sz[v]=1;
     }
-    pair<int,int> find(pair<int,int> v){
+    pair<int,int> find(pair<int,int> &v){
         if(parent[v]==v) return v;
         return parent[v]=find(parent[v]);
     }
-    void Union(pair<int,int> u,pair<int,int> v){
+    void Union(pair<int,int> &u,pair<int,int> &v){
         auto a=find(u);
         auto b=find(v);
         if(a!=b){
