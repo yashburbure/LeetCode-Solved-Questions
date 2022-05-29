@@ -2,7 +2,7 @@ class Solution {
 public:
     int n,m;
     vector<pair<int,int>> movements={{1,0},{-1,0},{0,1},{0,-1}};
-    bool is_safe(int i,int j){
+    bool inline is_safe(int i,int j){
         return i>=0 && j>=0 && i<n && j<m;
     }
     void dfs(int i,int j,vector<vector<char>>& bo){
