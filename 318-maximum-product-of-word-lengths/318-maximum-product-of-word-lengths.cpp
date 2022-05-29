@@ -3,24 +3,22 @@ public:
     int max(int a,int b){
         return (a>b)?a:b;
     }
-    int maxProduct(vector<string>& words) {
-        int n=words.size();
-        vector<unordered_map<char,bool>> mp;
-        for(int j=0;j<n;j++){
-            unordered_map<char,bool> curr;
-            for(int i=0;i<words[j].length();i++){
-                curr[words[j][i]]=1;
+    int maxProduct(vector<string>& w) {
+        int n=w.size();
+        vector<int> mask(n,0);
+        for(int i=0;i<n;i++){
+            for(int j=0;j<w[i].length();j++){
+                int bit=w[i][j]-'a';
+                mask[i]|=(1<<bit);
             }
-            mp.push_back(curr);
         }
         int ans=0;
         for(int i=0;i<n;i++){
-            for(int j=i+1;j<n;j++){
-                bool flag=1;
-                for(char ch='a';ch<='z';ch++){
-                    if(mp[i][ch]==1 && mp[j][ch]==1) flag=0;
+            for(int j=0;j<n;j++){
+                int bit_and=mask[i]&mask[j];
+                if(bit_and==0){
+                    ans=max(ans,w[i].length()*w[j].length());
                 }
-                if(flag) ans=max(ans,words[i].length()*words[j].length());
             }
         }
         return ans;
