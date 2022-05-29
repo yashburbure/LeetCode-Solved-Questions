@@ -1,16 +1,23 @@
 class Solution {
 public:
-    int numJewelsInStones(string jewels, string stones) {
+    int numJewelsInStones(string j, string s) {
         int ans=0;
-        for(char &ch:stones){
-            bool flag=0;
-            for(char &ch1:jewels){
-                if(ch1==ch){
-                    flag=1;
-                    break;
-                }
+        long long mask=0;
+        for(char &ch:j){
+            if(ch>='a' && ch<='z'){
+                mask|=(1ll<<(ch-'a'));
             }
-            if(flag) ans++;
+            else{
+                mask|=(1ll<<(ch-'A'+26));
+            }
+        }
+        for(char &ch:s){
+            if(ch>='a' && ch<='z'){
+                if(mask&(1ll<<(ch-'a'))) ans++;
+            }
+            else{
+                if(mask&(1ll<<(ch-'A'+26))) ans++;
+            }
         }
         return ans;
     }
