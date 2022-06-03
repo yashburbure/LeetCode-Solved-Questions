@@ -1,9 +1,7 @@
 class NumMatrix {
 public:
-    vector<vector<int>> A;
     int prefix[205][205];
     NumMatrix(vector<vector<int>>& matrix) {
-        A=matrix;
         int n=matrix.size();
         int m=matrix[0].size();
         for(int i=0;i<=n;i++){
