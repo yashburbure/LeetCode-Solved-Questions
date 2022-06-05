@@ -1,7 +1,7 @@
 class Solution {
 public:
-    void palindrome_partition(string &s,int st,int end,int n,vector<vector<bool>>& dp,
-                              vector<string> curr_part,vector<vector<string>>& ans){
+    void palindrome_partition(string &s,int st,int end,int &n,vector<vector<bool>>& dp,
+                              vector<string> &curr_part,vector<vector<string>>& ans){
         if(st==n || end==n){
             if(st==n && end==n){
                 ans.push_back(curr_part);                
@@ -9,14 +9,14 @@ public:
             return;
         }
         if(dp[end][st]){
-            vector<string> new_par=curr_part;
             string partition_mem="";
             for(int i=st;i<=end;i++){
                 partition_mem.push_back(s[i]);
             }
             curr_part.push_back(partition_mem);
             palindrome_partition(s,end+1,end+1,n,dp,curr_part,ans);
-            palindrome_partition(s,st,end+1,n,dp,new_par,ans);
+            curr_part.pop_back();
+            palindrome_partition(s,st,end+1,n,dp,curr_part,ans);
         }
         else{
             palindrome_partition(s,st,end+1,n,dp,curr_part,ans);
@@ -48,7 +48,8 @@ public:
                 }
             }
         }
-        palindrome_partition(s,0,0,n,dp,{},ans);
+        vector<string> curr_part;
+        palindrome_partition(s,0,0,n,dp,curr_part,ans);
         return ans;
     }
 };
