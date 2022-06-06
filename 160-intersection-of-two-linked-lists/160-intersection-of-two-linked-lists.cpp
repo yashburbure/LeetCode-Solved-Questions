@@ -9,23 +9,20 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        unordered_map<int,vector<ListNode*>> mp;
-        unordered_map<int,int> ptr;
-        ListNode* temp=headA;
-        while(temp){
-            mp[temp->val].push_back(temp);
-            temp=temp->next;
-        }
         ListNode* ans=NULL;
-        temp=headB;
-        ListNode* temp_ptr;
-        while(temp){
-            if(ptr[temp->val]<mp[temp->val].size()){
-                if(mp[temp->val][ptr[temp->val]]==temp) ans=temp;
-                ptr[temp->val]++;
-            }
-            if(ans) break;
-            temp=temp->next;
+        stack<ListNode*> st1,st2;
+        while(headA){
+            st1.push(headA);
+            headA=headA->next;
+        }
+        while(headB){
+            st2.push(headB);
+            headB=headB->next;
+        }
+        while(st1.size() && st2.size() && st1.top()==st2.top()){
+            ans=st1.top();
+            st1.pop();
+            st2.pop();
         }
         return ans;
     }
