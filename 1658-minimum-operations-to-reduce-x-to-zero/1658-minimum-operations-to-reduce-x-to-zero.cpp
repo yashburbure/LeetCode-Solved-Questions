@@ -1,5 +1,9 @@
 class Solution {
 public:
+    Solution() {
+        ios_base::sync_with_stdio(false);
+        cin.tie(nullptr);
+    }
     int minOperations(vector<int>& nums, int &x) {
         int n=nums.size();
         int* suffix=new int[n];
