@@ -13,7 +13,6 @@ public:
         }
         int ans=1+minDistancedp(word1,word2,i,j-1);
         ans=min(ans,1+minDistancedp(word1,word2,i-1,j));
-        ans=min(ans,2+minDistancedp(word1,word2,i-1,j-1));
         return dp[i][j]=ans;
     }
     int minDistance(string word1, string word2) {
