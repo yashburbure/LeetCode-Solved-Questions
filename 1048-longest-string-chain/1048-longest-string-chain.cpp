@@ -9,19 +9,14 @@ public:
         for(int i=0;i<n;i++){
             mp[words[i].length()].push_back(i);
         }
-        string s1;
-        string s2;
         int j,k;
         for(int i=2;i<=16;i++){
             for(int &it1:mp[i]){
                 for(int &it2:mp[i-1]){
-                    s1=words[it1];
-                    s2=words[it2];
-                    // cout<<s1<<" "<<s2<<endl;
                     j=0;
                     k=0;
                     while(j<i && k<i-1){
-                        if(s1[j]==s2[k]){
+                        if(words[it1][j]==words[it2][k]){
                             j++;
                             k++;
                         }
@@ -36,8 +31,6 @@ public:
                 }
             }
         }
-        
-        
         delete[] longestChain;
         return ans;
     }
