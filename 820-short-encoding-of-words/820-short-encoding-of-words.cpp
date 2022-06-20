@@ -23,7 +23,7 @@ void insert(Trie*& root,string& s,int& i,int& ind){
         insert(root->child[s[i]-'a'],s,i,ind);
     }
 }
-void traverse(Trie*& root,string& s,int i,vector<bool>& vis){
+void traverse(Trie*& root,string& s,int& i,vector<bool>& vis){
     for(auto &it:root->ind){
         vis[it]=1;
     }
