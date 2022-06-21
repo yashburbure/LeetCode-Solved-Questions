@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int furthestBuilding(vector<int>& hei, int bri, int lad) {
+    int furthestBuilding(vector<int>& hei, int &bri, int &lad) {
         int n=hei.size();
         priority_queue<int,vector<int>,greater<int>> q;
         int ans=0;
