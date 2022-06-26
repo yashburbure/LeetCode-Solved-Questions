@@ -1,6 +1,8 @@
 class Solution {
 public:
     int maxScore(vector<int>& card, int k) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
         int n=card.size();
         int suffix[n+1];
         suffix[0]=0;
