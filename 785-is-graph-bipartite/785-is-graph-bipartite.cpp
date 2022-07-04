@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool isBipartite(vector<vector<int>>& graph) {
-        queue<short int> q;
+        queue<char> q;
         short int n=graph.size();
         vector<char> col(n,'n');
         short int tp,i,j;
