@@ -11,32 +11,34 @@
  */
 class Solution {
 public:
-    TreeNode* successor(TreeNode *root){
-        while(root->left) root=root->left;
-        return root;
-    }
-    TreeNode* deleteNode(TreeNode* root, int key) {
-        if(!root) return NULL;
-        if(root->val>key){
-            root->left=deleteNode(root->left,key);
+    TreeNode* deleteNode(TreeNode*& root, int &key) {
+        if(!root){
+            return NULL;
         }
-        else if(root->val<key){
-            root->right=deleteNode(root->right,key);
-        }
-        else{
-            if(root->left&&root->right){
-                TreeNode* succ=successor(root->right);
-                root->right=deleteNode(root->right,succ->val);
-                root->val=succ->val;
-                return root;
-            }
-            else if(root->right){
-                return root->right;
+        if(root->val==key){
+            if(root->left && root->right){
+                TreeNode* temp=root->right;
+                while(temp->left) temp=temp->left;
+                root->right=deleteNode(root->right,temp->val);
+                root->val=temp->val;
             }
             else if(root->left){
-                return root->left;
+                TreeNode* lef=root->left;
+                return lef;
             }
-            return NULL;
+            else if(root->right){
+                TreeNode* rig=root->right;
+                return rig;
+            }
+            else{
+                return NULL;
+            }
+        }
+        else if(root->val>key){
+            root->left=deleteNode(root->left,key);
+        }
+        else{
+            root->right=deleteNode(root->right,key);
         }
         return root;
     }
