@@ -12,33 +12,65 @@
 class Solution {
 public:
     TreeNode* deleteNode(TreeNode*& root, int &key) {
-        if(!root){
-            return NULL;
-        }
-        if(root->val==key){
-            if(root->left && root->right){
-                TreeNode* temp=root->right;
-                while(temp->left) temp=temp->left;
-                root->right=deleteNode(root->right,temp->val);
-                root->val=temp->val;
+        TreeNode* p=NULL;
+        TreeNode* q=root;
+        while(q){
+            if(q->val==key){
+                if(q->left && q->right){
+                    TreeNode* temp=q->right;
+                    while(temp->left) temp=temp->left;
+                    q->val=temp->val;
+                    q->right=deleteNode(q->right,temp->val);
+                }
+                else if(q->left){
+                    if(p){
+                        if(p->right==q){
+                            p->right=q->left;
+                        }
+                        else{
+                            p->left=q->left;
+                        }    
+                    }
+                    else{
+                        root=q->left;
+                    }
+                }
+                else if(q->right){
+                    if(p){
+                        if(p->right==q){
+                            p->right=q->right;
+                        }
+                        else{
+                            p->left=q->right;
+                        }   
+                    }
+                    else{
+                        root=q->right;
+                    }
+                }
+                else{
+                    if(p){
+                        if(p->left==q){
+                            p->left=NULL;
+                        }
+                        else{
+                            // cout<<p->val<<endl;
+                            p->right=NULL;
+                        }
+                    }
+                    else{
+                        root=NULL;
+                    }
+                }
+                break;
             }
-            else if(root->left){
-                TreeNode* lef=root->left;
-                return lef;
-            }
-            else if(root->right){
-                TreeNode* rig=root->right;
-                return rig;
+            p=q;
+            if(q->val>key){
+                q=q->left;
             }
             else{
-                return NULL;
+                q=q->right;
             }
-        }
-        else if(root->val>key){
-            root->left=deleteNode(root->left,key);
-        }
-        else{
-            root->right=deleteNode(root->right,key);
         }
         return root;
     }
