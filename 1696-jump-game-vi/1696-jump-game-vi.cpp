@@ -7,8 +7,9 @@ public:
         unordered_map<int,int> mp;
         mp[0]=nums[0];
         for(int i=1;i<n;i++){
-            if(i-k-1>=0)
-                st.erase(st.find({mp[i-k-1],i-k-1}));
+            if(i-k-1>=0){
+                st.erase(st.lower_bound({mp[i-k-1],i-k-1}));   
+            }
             mp[i]=nums[i]+(*st.begin()).first;
             st.insert({nums[i]+(*st.begin()).first,i});   
         }
