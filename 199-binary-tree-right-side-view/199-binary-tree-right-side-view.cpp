@@ -16,11 +16,11 @@ public:
         queue<TreeNode*> q;
         if(!root) return rightView;
         q.push(root);
-        short int n;
+        short int n,i;
         TreeNode* curr;
         while(q.size()){
             n=q.size();
-            for(int i=0;i<n;i++){
+            for(i=0;i<n;i++){
                 curr=q.front();
                 q.pop();
                 if(i==n-1){
