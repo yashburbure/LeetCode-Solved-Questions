@@ -1,15 +1,15 @@
 class Solution {
 public:
     vector<int> findOrder(int nc, vector<vector<int>>& pre) {
-        vector<int> graph[nc];
-        vector<int> indegree(nc,0);
+        vector<short int> graph[nc];
+        vector<short int> indegree(nc,0);
         vector<int> Order;
-        for(auto &it:pre){
-            graph[it[1]].push_back(it[0]);
-            indegree[it[0]]++;
-        }
-        queue<int> q;
         short int i,tp;
+        for(i=0;i<pre.size();i++){
+            graph[pre[i][1]].push_back(pre[i][0]);
+            indegree[pre[i][0]]++;
+        }
+        queue<short int> q;
         for(i=0;i<nc;i++){
             if(!indegree[i]){
                 Order.push_back(i);
@@ -19,7 +19,7 @@ public:
         while(q.size()){
             tp=q.front();
             q.pop();
-            for(auto &it:graph[tp]){
+            for(short int &it:graph[tp]){
                 indegree[it]--;
                 if(!indegree[it]){
                     q.push(it);
