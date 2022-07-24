@@ -16,7 +16,6 @@ public:
             else if(sum>target) hi--;
             else lo++;
         }
-        vector<int> ans;
-        return ans;
+        return {};
     }
 };
