@@ -25,6 +25,8 @@ public:
         return hi;
     }
     vector<int> searchRange(vector<int>& nums, int &target) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
         if(!nums.size()) return {-1,-1};
         vector<int> ans(2,-1);
         ans[0]=lower_bound(nums,target);
