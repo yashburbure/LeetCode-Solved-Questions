@@ -1,15 +1,17 @@
 class Solution {
 public:
     vector<int> findRightInterval(vector<vector<int>>& intervals) {
-        vector<pair<int,int>> arr;
         int n=intervals.size();
-        for(int i=0;i<n;i++){
-            arr.push_back({intervals[i][0],i});
+        int i,lo,hi,mid;
+        vector<pair<int,int>> arr(n);
+        vector<int> RightInterval(n);
+        
+        for(i=0;i<n;i++){
+            arr[i]={intervals[i][0],i};
         }
         sort(arr.begin(),arr.end());
-        int lo,hi,mid;
-        vector<int> RightInterval(n);
-        for(int i=0;i<n;i++){
+        
+        for(i=0;i<n;i++){
             lo=0;
             hi=n-1;
             while(hi-lo>1){
