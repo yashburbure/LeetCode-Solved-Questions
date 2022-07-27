@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    void flatten(TreeNode* root) {
+    void flatten(TreeNode*& root) {
         if(!root) return ;
         flatten(root->left);
         flatten(root->right);
