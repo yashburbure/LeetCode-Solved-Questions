@@ -17,11 +17,12 @@ public:
             }
             memset(Hsh,0,sizeof(Hsh));
         }
+        bool flag;
         for(i=0;i<n1;i++){
             for(j=0;j<words1[i].size();j++){
                 Hsh[words1[i][j]-'a']++;
             }
-            bool flag=true;
+            flag=true;
             for(j=0;j<26;j++){
                 if(Hsh[j]<Hsh_Max[j]){
                     flag=false;break;
