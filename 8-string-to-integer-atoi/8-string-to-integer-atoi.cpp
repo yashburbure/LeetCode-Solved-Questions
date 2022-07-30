@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int myAtoi(string s) {
+    int myAtoi(string& s) {
         char ch=' ';
         int i=0;
         long long ans=0;
