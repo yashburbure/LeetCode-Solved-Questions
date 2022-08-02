@@ -11,11 +11,19 @@
  */
 class Solution {
 public:
-    void Inorder(TreeNode*& root,vector<pair<int,TreeNode*>>& InorderArray){
-        if(!root) return;
-        Inorder(root->left,InorderArray);
-        InorderArray.push_back({root->val,root});
-        Inorder(root->right,InorderArray);
+    void Inorder(TreeNode*& root,vector<pair<int,TreeNode*>>& Array){
+        stack<TreeNode*> st;
+        TreeNode* curr=root;
+        while(curr || !st.empty()){
+            while(curr){
+                st.push(curr);
+                curr=curr->left;
+            }
+            curr=st.top();
+            st.pop();
+            Array.push_back({curr->val,curr});
+            curr=curr->right;
+        }
     }
     TreeNode* BuildBST(int lo,int hi,vector<pair<int,TreeNode*>>& InorderArray){
         if(lo>hi) return NULL;
