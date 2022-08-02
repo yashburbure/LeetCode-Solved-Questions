@@ -11,32 +11,25 @@
  */
 class Solution {
 public:
-    void Inorder(TreeNode*& root,vector<pair<int,TreeNode*>>& Array){
-        stack<TreeNode*> st;
-        TreeNode* curr=root;
-        while(curr || !st.empty()){
-            while(curr){
-                st.push(curr);
-                curr=curr->left;
-            }
-            curr=st.top();
-            st.pop();
-            Array.push_back({curr->val,curr});
-            curr=curr->right;
-        }
+    void inorder(TreeNode*& root,vector<int>& InorderArray){
+        if(!root) return;
+        inorder(root->left,InorderArray);
+        InorderArray.push_back(root->val);
+        inorder(root->right,InorderArray);
     }
-    TreeNode* BuildBST(int lo,int hi,vector<pair<int,TreeNode*>>& InorderArray){
-        if(lo>hi) return NULL;
-        int mid=(lo+hi)/2;
-        TreeNode* nn=InorderArray[mid].second;
-        nn->val=InorderArray[mid].first;
-        nn->left=BuildBST(lo,mid-1,InorderArray);
-        nn->right=BuildBST(mid+1,hi,InorderArray);
+    TreeNode* buildBST(int st,int end,vector<int>& InorderArray){
+        if(st>end){
+            return NULL;
+        }
+        int mid=(st+end)/2;
+        TreeNode* nn=new TreeNode(InorderArray[mid]);
+        nn->left=buildBST(st,mid-1,InorderArray);
+        nn->right=buildBST(mid+1,end,InorderArray);
         return nn;
     }
     TreeNode* balanceBST(TreeNode*& root) {
-        vector<pair<int,TreeNode*>> InorderArray;
-        Inorder(root,InorderArray);
-        return BuildBST(0,InorderArray.size()-1,InorderArray);
+        vector<int> InorderArray;
+        inorder(root,InorderArray);
+        return buildBST(0,InorderArray.size()-1,InorderArray);
     }
 };
