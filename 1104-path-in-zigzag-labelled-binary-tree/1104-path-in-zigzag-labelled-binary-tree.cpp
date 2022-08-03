@@ -1,26 +1,40 @@
 class Solution {
 public:
     vector<int> pathInZigZagTree(int label) {
-        vector<int> Path;
-        int Point=label;
-        int OppositePoint,NumberOfbits,start,end,mid;
-        while(Point!=1){
-            Path.push_back(Point);
-            NumberOfbits=log2(Point)+1;
-            start=(1ll<<NumberOfbits)-1;
-            end=(1ll<<NumberOfbits)/2;
-            mid=(start+end)/2;
-            if(Point>=mid){
-                Point=(1ll<<(NumberOfbits-1))+(1ll<<(NumberOfbits))-Point-1;
+        vector<vector<int>> AllLevel;
+        for(int i=1;;i++){
+            vector<int> CurrLevel;
+            bool flag=false;
+            int start=(1ll<<(i-1));
+            int end=(1ll<<(i))-1;
+            for(int j=start;j<=end;j++){
+                if(j==label) flag=true;
+                CurrLevel.push_back(j);
             }
-            else{
-                Point=(1ll<<NumberOfbits)-(Point-(1ll<<(NumberOfbits-1)))-1;
+            if(i%2==0){
+                reverse(CurrLevel.begin(),CurrLevel.end());
             }
-            Point=Point/2;
-            // cout<<Point<<endl;
+            AllLevel.push_back(CurrLevel);
+            if(flag) break;
         }
-        Path.push_back(1);
-        reverse(Path.begin(),Path.end());
-        return Path;
+        int index=-1;
+        for(int i=1;i<AllLevel[AllLevel.size()-1].size();i++){
+            if(AllLevel[AllLevel.size()-1][i]==label){
+                index=i;
+                break;
+            }
+        }
+        int CurrLevel=AllLevel.size()-1;
+        vector<int> ZigZagPath;
+        int element=label;
+        while(element!=1){
+            ZigZagPath.push_back(element);
+            index=index/2;
+            CurrLevel--;
+            element=AllLevel[CurrLevel][index];
+        }
+        ZigZagPath.push_back(1);
+        reverse(ZigZagPath.begin(),ZigZagPath.end());
+        return ZigZagPath;
     }
 };
