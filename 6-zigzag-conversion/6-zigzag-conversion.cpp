@@ -1,6 +1,6 @@
 class Solution {
 public:
-    string convert(string s, int numRows) {
+    string convert(string& s, int& numRows) {
         if(numRows==1) return s;
         vector<string> Rows(numRows,"");
         int CurrRow=0;
