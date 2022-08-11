@@ -11,17 +11,17 @@
  */
 class Solution {
 public:
-    void inorder(TreeNode* root,vector<int>& inod){
+    vector<int> InorderPath;
+    void inorder(TreeNode*& root){
         if(!root) return ;
-        inorder(root->left,inod);
-        inod.push_back(root->val);
-        inorder(root->right,inod);
+        inorder(root->left);
+        InorderPath.push_back(root->val);
+        inorder(root->right);
     }
     bool isValidBST(TreeNode* root) {
-        vector<int> inod;
-        inorder(root,inod);
-        for(int i=1;i<inod.size();i++){
-            if(inod[i-1]>=inod[i]) return 0;
+        inorder(root);
+        for(int i=1;i<InorderPath.size();i++){
+            if(InorderPath[i-1]>=InorderPath[i]) return 0;
         }
         return 1;
     }
