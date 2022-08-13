@@ -1,9 +1,11 @@
 class Solution {
 public:
-    int min(int a,int b){
-        return a>b?b:a;
+    static void inputOutput(){
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
     }
-    vector<int> findSubstring(string s, vector<string>& words) {
+    vector<int> findSubstring(string &s, vector<string>& words) {
+        inputOutput();
         unordered_map<string,int> Count;
         unordered_map<string,int> mp;
         int len=words[0].length();
