@@ -12,16 +12,18 @@ public:
         for(int i=0;i<words.size();i++){
             Count[words[i]]++;
         }
-        for(int i=0;i<s.length();i++){
+        int i=0,j;
+        while((s.length()-i)>=words.size()*len){
             mp.clear();
             CountWord=0;
-            for(int j=i;j<=s.length()-len;j+=len){
+            for(j=i;j<=s.length()-len;j+=len){
                 string New=s.substr(j,len);
-                // cout<<New<<endl;
                 if(Count.count(New)==0){
+                    i++;
                     break;
                 }
                 else if(mp[New]>=Count[New]){
+                    i++;
                     break;
                 }
                 else{
@@ -32,7 +34,7 @@ public:
                     ans.push_back(i);
                 }
             }
-            // cout<<CountWord<<endl;
+            if(j>s.length()-len) i++;
         }
         return ans;
     }
