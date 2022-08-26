@@ -1,8 +1,8 @@
 class Solution {
 public:
-    bool reorderedPowerOf2(int n) {
-        map<string,bool> powTwo;
-        long long no=1;
+    bool reorderedPowerOf2(int& n) {
+        unordered_map<string,bool> powTwo;
+        long int no=1;
         string s;
         while(no<=1e9){
             s=to_string(no);
