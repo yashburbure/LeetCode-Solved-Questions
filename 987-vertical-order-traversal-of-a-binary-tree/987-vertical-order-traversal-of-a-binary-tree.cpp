@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    vector<vector<int>> verticalTraversal(TreeNode* root) {
+    vector<vector<int>> verticalTraversal(TreeNode*& root) {
         map<int,vector<pair<int,int>>> mp;
         queue<pair<TreeNode*,pair<int,int>>> q;
         q.push({root,{0,0}});
