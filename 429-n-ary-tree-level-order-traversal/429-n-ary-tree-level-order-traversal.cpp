@@ -37,8 +37,10 @@ public:
                 tp=q.front();
                 q.pop();
                 for(j=0;j<tp->children.size();j++){
-                    q.push(tp->children[j]);
-                    curr.push_back(tp->children[j]->val);
+                    if(tp->children[j]){
+                        q.push(tp->children[j]);
+                        curr.push_back(tp->children[j]->val);   
+                    }
                 }
             }
             if(curr.size())
