@@ -12,7 +12,7 @@
 
 class Solution {
 public:
-    TreeNode* pruneTree(TreeNode* root) {
+    TreeNode* pruneTree(TreeNode*& root) {
         if(!root){
             return NULL;
         }
@@ -24,7 +24,6 @@ public:
         if(root->val){
             return root;
         }
-        delete root;
         return NULL;
     }
 };
