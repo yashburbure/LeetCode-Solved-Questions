@@ -24,6 +24,7 @@ public:
         if(root->val){
             return root;
         }
+        delete root;
         return NULL;
     }
 };
