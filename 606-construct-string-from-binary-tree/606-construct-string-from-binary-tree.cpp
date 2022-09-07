@@ -13,26 +13,15 @@ string ans;
 void preorder(TreeNode*& root){
     if(!root) return;
     ans+=to_string(root->val);
-    if(root->left && root->right){
+    if(root->left || root->right){
         ans.push_back('(');
         preorder(root->left);
         ans.push_back(')');
-        ans.push_back('(');
-        preorder(root->right);
-        ans.push_back(')');   
-    }
-    else if(root->left){
-        ans.push_back('(');
-        preorder(root->left);
-        ans.push_back(')');
-    }
-    else if(root->right){
-        ans.push_back('(');
-        preorder(root->left);
-        ans.push_back(')');
-        ans.push_back('(');
-        preorder(root->right);
-        ans.push_back(')'); 
+        if(root->right){
+            ans.push_back('(');
+            preorder(root->right);
+            ans.push_back(')');   
+        }   
     }
 }
 class Solution {
