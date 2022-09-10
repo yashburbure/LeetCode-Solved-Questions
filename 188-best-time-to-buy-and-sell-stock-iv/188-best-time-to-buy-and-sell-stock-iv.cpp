@@ -1,6 +1,6 @@
+int dp[1005][2][101];
 class Solution {
 public:
-    int dp[1005][2][101];
     int FindProfit(vector<int>& prices,int ind,int buy,int transaction,int& k){
         if(ind==prices.size()) return 0;
         if(transaction==k) return 0;
